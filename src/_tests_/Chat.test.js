@@ -37,8 +37,7 @@ describe('Chat renders without crash', () => {
     it("renders avatar when avatar is defined", () => {
         const avatar = "http://dummyimage.com/100x100.jpg/ff4444/ffffff";
         const chatMessage = {...chat_test, avatar};
-        const {getByTestId, debug} = render(<Chat record={chatMessage}/>);
-        console.log(debug());
+        const {getByTestId} = render(<Chat record={chatMessage}/>);
         const messageContainer = getByTestId("message-container");
         expect(messageContainer).toBeInTheDocument();
 

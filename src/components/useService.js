@@ -13,7 +13,6 @@ function useService() {
             const res = await getChatLog();
             if (!cancelRequest) {
                 setData(res);
-                console.log(res);
                 setLoading(false);
             }
         } catch (e) {
@@ -28,7 +27,7 @@ function useService() {
     useEffect(() => {
         getMessgaes();
         return () => {
-            setCancelRequest(false);
+            setCancelRequest(true);
         };
     }, []);
 
