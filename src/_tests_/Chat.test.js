@@ -1,5 +1,5 @@
 import React from "react";
-import {render} from '@testing-library/react';
+import {cleanup, fireEvent, render} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect'
 import Chat from "../components/Chat";
 
@@ -15,6 +15,11 @@ describe('Chat renders without crash', () => {
         message: 'Hello, World!',
         avatar: null
     };
+
+    afterEach(() => {
+        cleanup();
+    });
+
 
     it("renders default values", () => {
         const {getByTestId} = render(<Chat record={chat_test}/>);
@@ -51,10 +56,23 @@ describe('Chat renders without crash', () => {
     });
 
     it("on omouseover email details are shown", () => {
+        const {queryByTestId, getByTestId} = render(<Chat record={chat_test}/>);
+        const messageContainer = getByTestId("message-container");
+
+        expect(queryByTestId("user-email")).toBeNull();
+        fireEvent.mouseOver(messageContainer);
+
+        expect(getByTestId("user-email")).toBeInTheDocument();
 
     });
 
     it("on omouseout email details is removed", () => {
+        const {queryByTestId, getByTestId} = render(<Chat record={chat_test}/>);
+        const messageContainer = getByTestId("message-container");
+        fireEvent.mouseOver(messageContainer);
+        expect(getByTestId("user-email")).toBeInTheDocument();
+        fireEvent.mouseOut(messageContainer);
+        expect(queryByTestId("user-email")).toBeNull();
 
     });
 });

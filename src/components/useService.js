@@ -7,7 +7,7 @@ function useService() {
     const [loading, setLoading] = useState({});
     const [cancelRequest, setCancelRequest] = useState(false);
 
-    const getMessgaes = async () => {
+    const fetchData = async () => {
         setLoading(true);
         try {
             const res = await getChatLog();
@@ -25,7 +25,7 @@ function useService() {
     };
 
     useEffect(() => {
-        getMessgaes();
+        fetchData();
         return () => {
             setCancelRequest(true);
         };

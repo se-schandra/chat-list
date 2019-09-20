@@ -64,6 +64,22 @@ describe("test useService hook", () => {
     });
 
 
+    /* it("if component is unmounted before response then set data is not called", async () => {
+         getChatLog.mockImplementation(() => {
+             setTimeout(()=>{
+                 Promise.reject("error");
+             },500);
+         });
+         const {result, unmount, waitForNextUpdate} = renderHook(() => useService());
+         expect(result.current.cancelRequest).toEqual(false);
+         unmount();
+         expect(result.current.cancelRequest).toEqual(true);
+         await waitForNextUpdate();
+         expect(getChatLog).toHaveBeenCalledTimes(3);
+         expect(result.current.error).toEqual("");
+     });
+ */
+
 });
 
 
