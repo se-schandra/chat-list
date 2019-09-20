@@ -50,7 +50,12 @@ img {
     margin: 0 1.5rem 0 0;
 
 }
-
+span{
+    padding: 10px;
+    color: coral;
+    font-size: 0.9em;
+    font-style: italic;
+}
 em {
     font-size: 0.8em;
 }
@@ -68,4 +73,12 @@ em {
 .message-conatiner:hover {
     background: #eee;
     cursor: pointer;
+}
+
+.show{
+    display: inline-block;
+}
+
+.hide{
+    display: none;
 }

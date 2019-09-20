@@ -2,6 +2,10 @@ import React from "react";
 import Chat from "./Chat";
 import useService from "./useService";
 
+/**
+ * Component to render all the chats received from service.js
+ * Uses useService hook to manage data retrieval
+ */
 function ChatList() {
     const {data, error, loading} = useService();
 

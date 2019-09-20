@@ -1,15 +1,23 @@
 import React, {useEffect, useRef, useState} from 'react';
 import * as PropTypes from "prop-types";
 
+/**
+ * Component to render chat details
+ * @param record: chat details
+ */
 function Chat({record}) {
     const {avatar, mesaageId, fullName, timestamp, email, message} = record;
+
+    //hook to manage hover state
     const [hoverOn, setHoverOn] = useState(false);
     const messageRef = useRef();
 
+    //mouse move handler
     function handleMousemove(hover) {
         setHoverOn(hover);
     }
 
+    //attach listener to node on load
     useEffect(() => {
         const node = messageRef.current;
         if (node) {
@@ -22,19 +30,20 @@ function Chat({record}) {
             };
         }
 
-    });
+    }, []);
 
     return (
         <div data-testid="message-container" id={mesaageId} className="message-conatiner" ref={messageRef}>
             {avatar && <img data-testid="avatar-img" src={avatar} alt={email}/>}
-            {hoverOn && <div data-testid="user-email">{email}</div>}
-            <div data-testid="user-name">{fullName}</div>
+            <div data-testid="user-name">
+                {fullName}
+                <span className={hoverOn ? 'show' : 'hide'} data-testid="user-email">{email}</span>
+            </div>
             <p data-testid="message-text">{message}</p>
             <em data-testid="timestamp-text">{timestamp}</em>
         </div>
     )
 }
-
 
 Chat.propTypes = {
     record: PropTypes.shape({
@@ -47,4 +56,6 @@ Chat.propTypes = {
         avatar: PropTypes.string
     }).isRequired
 };
+
+
 export default Chat;

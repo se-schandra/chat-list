@@ -55,24 +55,24 @@ describe('Chat renders without crash', () => {
 
     });
 
-    it("on omouseover email details are shown", () => {
+    it("on omouseover email is shown", () => {
         const {queryByTestId, getByTestId} = render(<Chat record={chat_test}/>);
         const messageContainer = getByTestId("message-container");
 
-        expect(queryByTestId("user-email")).toBeNull();
+        expect(queryByTestId("user-email")).toHaveClass('hide');
         fireEvent.mouseOver(messageContainer);
 
-        expect(getByTestId("user-email")).toBeInTheDocument();
+        expect(getByTestId("user-email")).toHaveClass('show');
 
     });
 
-    it("on omouseout email details is removed", () => {
+    it("on omouseout email is removed", () => {
         const {queryByTestId, getByTestId} = render(<Chat record={chat_test}/>);
         const messageContainer = getByTestId("message-container");
         fireEvent.mouseOver(messageContainer);
-        expect(getByTestId("user-email")).toBeInTheDocument();
+        expect(getByTestId("user-email")).toHaveClass('show');
         fireEvent.mouseOut(messageContainer);
-        expect(queryByTestId("user-email")).toBeNull();
+        expect(queryByTestId("user-email")).toHaveClass('hide');
 
     });
 });
